@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\v1;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\{Subject, Teacher};
+use App\Models\v1\{Subject, Teacher};
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>

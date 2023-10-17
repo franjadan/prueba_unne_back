@@ -1,13 +1,14 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\v1;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Study>
  */
-class TeacherFactory extends Factory
+class StudyFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +18,7 @@ class TeacherFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->word(),
         ];
     }
 }

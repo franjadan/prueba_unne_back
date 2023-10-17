@@ -1,18 +1,18 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\v1;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Study;
+use App\Models\v1\SubjectTeacher;
 
-class StudySeeder extends Seeder
+class SubjectTeacherSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Study::factory(3)->create();
+        SubjectTeacher::factory(10)->create();
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\v1;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Study;
+use App\Models\v1\Study;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Subject>
@@ -18,7 +18,7 @@ class SubjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->word(),
             'study_id' => Study::inRandomOrder()->first()->id,
         ];
     }
