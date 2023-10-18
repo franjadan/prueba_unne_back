@@ -1,66 +1,100 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sail (Docker)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Necesitas tener instalado la última versión de docker y docker compose.
 
-## About Laravel
+los servicios expuestos son:
+ - PHP: 8.2
+ - Mysql: 8.0
+ - PhpMyAdmin: latest
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Instalar Dependencias y Configurar el Entorno
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+composer install
+cp .env.example .env
+./vendor/bin/sail artisan key:generate
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Configurar la Base de Datos
 
-## Learning Laravel
+Configura el archivo .env con los detalles de la base de datos MySQL.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Ejecutar Migraciones y Datos de Prueba
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+./vendor/bin/sail artisan migrate:fresh --path=database/migrations/v1
+./vendor/bin/sail artisan db:seed --class="Database\\Seeders\\v1\\DatabaseSeeder"
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Iniciar el Servidor de Desarrollo
 
-## Laravel Sponsors
+./vendor/bin/sail artisan serve
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Test unitarios
 
-### Premium Partners
+### Configura la Base de Datos de Pruebas
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+cp .env.example .env.testing
 
-## Contributing
+Configura el archivo .env con los detalles de la base de datos MySQL.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Limpia la caché del nuevo .env
 
-## Code of Conduct
+./vendor/bin/sail artisan config:clear --env=testing
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Ejecuta Migraciones en Base de Datos de prueba
 
-## Security Vulnerabilities
+./vendor/bin/sail artisan --env=testing migrate:fresh --path=database/migrations/v1
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Ejecuta los tests
 
-## License
+./vendor/bin/sail artisan test
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Simplificar comando
+
+Crear un alias para usar sail en vez de ./vendor/bin/sail:
+
+alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
+
+# (XAMPP/PHP)
+
+## Versiones requeridas
+
+- PHP: 8.2
+- Mysql: 8.0
+- Laravel: 10
+
+## Instalar Dependencias y Configurar el Entorno
+
+composer install
+cp .env.example .env
+php artisan key:generate
+
+## Configurar la Base de Datos
+
+Configura el archivo .env con los detalles de la base de datos MySQL.
+
+## Ejecutar Migraciones y Datos de Prueba
+
+php artisan migrate:fresh --path=database/migrations/v1
+php artisan db:seed --class="Database\\Seeders\\v1\\DatabaseSeeder"
+
+## Iniciar el Servidor de Desarrollo
+
+php artisan serve
+
+## Test unitarios
+
+### Configura la Base de Datos de Pruebas
+
+cp .env.example .env.testing
+
+Configura el archivo .env con los detalles de la base de datos MySQL.
+
+### Limpia la caché del nuevo .env
+
+php artisan config:clear --env=testing
+
+### Ejecuta Migraciones en Base de Datos de prueba
+
+php artisan --env=testing migrate:fresh --path=database/migrations/v1
+
+### Ejecuta los tests
+
+php artisan test
