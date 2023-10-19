@@ -14,12 +14,14 @@ use App\Http\Controllers\v1\{StudyController, SubjectController, TeacherControll
 |
 */
 
-Route::prefix('v1')->group(function () {
-    Route::resource('studies', StudyController::class);
+Route::middleware('requestLogger')->group(function () {
+    Route::prefix('v1')->group(function () {
+        Route::resource('studies', StudyController::class);
 
-    Route::get('studies/{id}/subjects', [SubjectController::class, 'getByStudy']);
+        Route::get('studies/{id}/subjects', [SubjectController::class, 'getByStudy']);
 
-    Route::resource('teachers', TeacherController::class)->only('index');
+        Route::resource('teachers', TeacherController::class)->only('index');
 
-    Route::resource('subjects-with-teachers', SubjectTeacherController::class)->only('index');
+        Route::resource('subjects-with-teachers', SubjectTeacherController::class)->only('index');
+    });
 });
