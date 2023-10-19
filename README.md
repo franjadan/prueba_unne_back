@@ -120,7 +120,7 @@ alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
 
 # Postman
 
-Cambiar la variable de la collecion en función al método servidor de desarrollo que se genere
+Cambiar la variable de la collection en función al servidor de desarrollo que se genere
 
 # Logs
 
