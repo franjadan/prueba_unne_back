@@ -1,5 +1,11 @@
 # Instalación y configuración del proyecto
 
+## Se plantean dos opciones para instalar el proyecto:
+
+- [Haciendo uso de XAMPP y PHP](#xamppphp)
+- [Haciendo uso de Laravel Sail](#sail)
+
+<a href="#xamppphp"></a>
 ## (XAMPP/PHP)
 
 ### Versiones requeridas
@@ -60,6 +66,7 @@ php artisan --env=testing migrate:fresh --path=database/migrations/v1
 
 php artisan test
 
+<a href="#sail"></a>
 ## Sail
 
 Necesitas tener instalado la última versión de docker y docker compose.
